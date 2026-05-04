@@ -1,0 +1,14 @@
+services:
+  express-app:
+    image: jouni609/expresspipeline:latest
+    container_name: express-app
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  watchtower:
+    image: nickfedor/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    command: express-app
